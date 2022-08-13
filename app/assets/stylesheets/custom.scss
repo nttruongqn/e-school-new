@@ -482,10 +482,10 @@ input {
 }
 
 .gravatar_edit {
-  margin-top: -50px;
-  width: 200px;
-  height: 100px;
-  margin-left: 220px;
+  // margin-top: -50px;
+  // width: 200px;
+  // height: 100px;
+  // margin-left: 220px;
 }
 
 .update_user {
@@ -750,8 +750,8 @@ input.button--search:hover {
   text-align: center;
 }
 .form-profile {
-  width: 55%;
   position: relative;
+  left: 140px;
   height: 100%;
   background-color: #90e0ef;
   border-radius: 15px;
@@ -761,8 +761,7 @@ input.button--search:hover {
     position: relative;
     font-size: 50px;
     font-weight: bold;
-    right: 20%;
-    margin-bottom: 70px;
+    // right: 20%;
   }
   .avatar_edit {
     // position: absolute;
@@ -1017,14 +1016,14 @@ h1.header__left-name {
 }
 .update_user {
   .form-control {
-    width: 430px;
+    width: 100%;
   }
   input#user_image_attributes_image_url {
     margin-left: 15px;
     // width: 200px;
   }
   input.btn.btn-primary.btn_submit {
-    width: 430px;
+    width: 100%;
   }
 }
 
@@ -1300,12 +1299,12 @@ input.btn.btn-primary {
 }
 //exam_cart
 input {
-  background-color: #1b7e34;
-  // color: white;
-  font-weight: bold;
-  margin-top: 3px;
-  border-radius: 38px;
-  padding: 10px 0px;
+  // background-color: #1b7e34;
+  // // color: white;
+  // font-weight: bold;
+  // margin-top: 3px;
+  // border-radius: 38px;
+  // padding: 10px 0px;
 }
 
 input.select {
@@ -2809,7 +2808,7 @@ label {
 }
 
 input {
-  background-color: #f5f5f5;
+  // background-color: #f5f5f5;
 }
 
 .answer-ul {
@@ -3076,4 +3075,12 @@ a.item-header-link {
   position: absolute;
   margin-top: 4px \9;
   margin-left: -272px;
+}
+
+.update_user input#user_image_attributes_image_url {
+  margin-left: 0px;
+}
+
+.update_user .form-control {
+width: 100%;
 }
