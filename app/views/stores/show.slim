@@ -1,0 +1,26 @@
+.mt-4
+  .row
+  - @stores.each do |store|
+    .col-md-4
+      .card.card-course-item.test-exam
+        a href="#"
+          - if store.image?
+             img.card-img-top src="/assets/#{store.image}"
+          -else
+             img.card-img-top src="/assets/course.jpg"
+        /   - else
+        /       img.card-img-top alt=("KHOA KIEM TRA SQL") src="#{classe.image.image_url}"
+        .card-body
+          a href=""
+            h5.card-title  #{store.name}
+
+          p.card-text.text Giá:  #{store.price}
+          = form_for UserStore.new do |f|
+            fieldset
+              .form-group
+                = f.hidden_field :user_id , value: current_user.id
+                = f.hidden_field :course_id , value: store.id
+                
+              = f.submit ("Mua hàng"), class: "btn btn-primary"
+      
+          - unless current_user?(@user)

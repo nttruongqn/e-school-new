@@ -1,0 +1,28 @@
+.col-lg-3
+  - if logged_in? && current_user.manager?
+      h2.my-4
+        =  t(".admin_title")
+      .list-group
+        = link_to t(".Quản lí giáo viên"), admin_exams_path, class: "list-group-item1"
+        = link_to t(".Quản lí người dùng"), admin_users_path, class: "list-group-item1"
+        = link_to t(".Quản lí bài viết"), admin_exams_path, class: "list-group-item1"
+        = link_to t(".Quản lí cửa hàng"), stores_admin_path, class: "list-group-item1"
+        = link_to t(".Quản lí bài thi"), admin_exams_path, class: "list-group-item1"
+        = link_to t(".Thông kê Kết quả kiểm tra"), admin_statistics_path, class: "list-group-item1"
+        = link_to t(".Quản lí lớp học"), classes_admin_path, class: "list-group-item1"
+        = link_to t(".Quản lí khóa học"), courses_admin_path, class: "list-group-item1"
+        = link_to t(".Quản lí thư viện"), books_admin_path, class: "list-group-item1"
+      -if @count_cart
+      -if @count_cart
+        = render 'shared/stats'
+  - else
+      h2.my-4
+        = button_to t(".user_title")
+      .list-group
+        = link_to t(".user_func1"), client_exams_path, class: "list-group-item1"
+        - if logged_in? && current_user.user?
+          = link_to t(".user_func2"), client_user_history_exams_path, class: "list-group-item1"
+          -if @count_cart
+            = render 'shared/stats'
+        - else
+          = link_to t(".user_func2"), "#", class: "list-group-item1"

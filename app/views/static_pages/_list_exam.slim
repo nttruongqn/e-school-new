@@ -1,0 +1,24 @@
+.mt-4
+  .row
+  - @exams.each do |exam|
+    .col-md-4
+      .card.card-course-item.test-exam
+        a href="#"
+          - if exam.image.blank?
+             img.card-img-top src="/assets/test.jpg"
+          - else
+              img.card-img-top alt=("KHOA KIEM TRA SQL") src="#{exam.image.image_url}"
+        .card-body
+          a href="#{exam_details_path(exam_id: exam)}"
+            h5.card-title Bai Test #{exam.name} (chi tiết)
+          p.card-text.text Giup on tap noi dung #{exam.name}
+          - unless current_user?(@user)
+            #select_form
+              - if current_user.selecting?(exam)
+                = form_for(current_user.active_examcarts.find_by(exam_id: exam.id), 
+                  html: { method: :delete }) do |f|                                          
+                  = f.submit "Unselect", class: "input"
+              - else
+                = form_for(current_user.active_examcarts.build) do |f|
+                  div= hidden_field_tag :exam_id, exam.id
+                  = f.submit "Select", class: "input select"

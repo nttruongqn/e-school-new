@@ -1,0 +1,9 @@
+- provide :title, t("users.exams.index.title")
+.col-lg-9
+  h1.center = t"users.exams.index.h1_html"
+  = render "search"
+  - if @exams.length > 0
+    = render "user_exam"
+  - else
+    = render "user_exam"
+    p.error_search = t"users.exams.index.search"

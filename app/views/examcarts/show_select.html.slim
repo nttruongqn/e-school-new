@@ -1,0 +1,36 @@
+.px-4.px-lg-0
+  .container.text-white.py-5.text-center
+    h1.display-4 Exam cart 
+    h3.glyphicon.glyphicon-shopping-cart
+  .pb-5
+    .container
+      .row
+          .table-responsive
+            table.table
+              thead
+                tr
+                  th.border-0.bg-light scope="col" 
+                    .p-2.px-3.text-uppercase Exam name
+                  th.border-0.bg-light scope="col" 
+                    .py-2.text-uppercase Pass score
+                  th.border-0.bg-light scope="col" 
+                    .py-2.text-uppercase time limit
+                  th.border-0.bg-light scope="col" 
+                    .py-2.text-uppercase delete
+              tbody
+              - @exam_carts.each do |exam_cart|
+                tr
+                  th.border-0 scope="row" 
+                    .p-2 
+                      .ml-3.d-inline-block.align-middle
+                        h5.mb-0
+                          a.text-dark.d-inline-block.align-middle href="#" = exam_cart.exam.name
+                  td.border-0.align-middle
+                    strong = exam_cart.exam.pass_score
+                  td.border-0.align-middle
+                    strong = exam_cart.exam.time_limit
+                  td.border-0.align-middle
+                    = link_to examcart_path(exam_cart), method: :delete, data: { confirm: 'Are you sure?' } do
+                      i.fa.fa-trash-o
+                  td.border-0.align-middle
+                    = link_to t("Start"), client_exam_path(exam_cart.exam.id), class: "str", type: "button", data: {id: "#{exam_cart.exam.id}", time_limit: "#{exam_cart.exam.time_limit}"}                    

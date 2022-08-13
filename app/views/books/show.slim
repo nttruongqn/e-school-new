@@ -1,0 +1,26 @@
+.mt-4
+  .row
+  - @books.each do |book|
+    .col-md-4
+      .card.card-course-item.test-exam
+        a href="#"
+          - if book.image?
+             img.card-img-top src="/assets/#{book.image}"
+          -else
+             img.card-img-top src="/assets/course.jpg"
+        /   - else
+        /       img.card-img-top alt=("KHOA KIEM TRA SQL") src="#{classe.image.image_url}"
+        .card-body
+          a href=""
+            h5.card-title  #{book.name} 
+
+          p.card-text.text Tác giả:  #{book.author}
+          = form_for UserCourse.new do |f|
+            fieldset
+              .form-group
+                = f.hidden_field :user_id , value: current_user.id
+                = f.hidden_field :course_id , value: book.id
+                
+              = f.submit ("Mượn sách"), class: "btn btn-primary"
+      
+          - unless current_user?(@user)

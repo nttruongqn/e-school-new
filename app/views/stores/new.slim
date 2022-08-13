@@ -1,0 +1,20 @@
+- provide :title, t(".title")
+.col-lg-6
+ 
+  .row.from_login
+    .col-md-9.col-md-offset-1
+      .panel.panel-default
+        .panel-heading
+          h2.center= t ".h1_html"
+        .panel-body
+          = form_for(@store) do |f|
+            fieldset
+              .form-group
+                = f.label :name, t("stores.new.name") 
+                = f.text_field :name
+                |
+                = f.label :price, t("stores.new.price")
+                = f.text_field :price
+              = f.submit "Tạo sản phẩm", class: "btn btn-primary"
+    .col-md-3.col-md-offset-1.login_img
+      img.img-fluid alt=("Logo Login") src="/assets/logo_login1.svg"

@@ -1,0 +1,20 @@
+- provide :title, t(".title")
+.col-lg-6
+ 
+  .row.from_login
+    .col-md-9.col-md-offset-1
+      .panel.panel-default
+        .panel-heading
+          h2.center= t ".h1_html"
+        .panel-body
+          = form_for(@book) do |f|
+            fieldset
+              .form-group
+                = f.label :name, t("books.new.name") 
+                = f.text_field :name
+                |
+                = f.label :author, t("books.new.author")
+                = f.text_field :author
+              = f.submit "Tạo sách", class: "btn btn-primary"
+    .col-md-3.col-md-offset-1.login_img
+      img.img-fluid alt=("Logo Login") src="/assets/logo_login1.svg"

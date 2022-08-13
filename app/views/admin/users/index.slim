@@ -1,0 +1,66 @@
+- if logged_in? && current_user.manager?
+  - provide(:title,'All users')
+  h1 All users
+  ul.users
+    - @users.each do |user|
+      -if user.manager? or user.admin?
+      -else
+        li
+          - if user.image.blank?
+            .logo_user
+              = gravatar_for user
+          - else
+            .logo_user
+              img.avatar-user alt="#{user.name}" src="#{user.image.image_url}"
+          .ten_user
+              = link_to user.name, admin_user_path(user.id)
+          .email_user
+              = link_to user.email, admin_user_path(user.id)
+          = link_to admin_user_path(user.id),
+                        method: :delete,data: {confirm:"You sure?"}, class: "delete_user" do
+            i.fa.fa-trash-o aria-hidden="true"
+            = t("Delete_user")
+          = link_to admin_user_path(user.id), method: :get, class: "detail_user" do
+            i.fa.fa-expand aria-hidden="true"
+              = t("Detail_user")
+    = will_paginate
+- else 
+  .px-4.px-lg-0
+  .container.text-white.py-5.text-center
+    h1.display-4 Exam cart 
+    h3.glyphicon.glyphicon-shopping-cart
+  .pb-5
+    .container
+      .row
+          .table-responsive
+            table.table
+              thead
+                tr
+                  th.border-0.bg-light scope="col" 
+                    .p-2.px-3.text-uppercase Tên
+                  th.border-0.bg-light scope="col" 
+                    .py-2.text-uppercase Số bài test
+                  th.border-0.bg-light scope="col" 
+                    .py-2.text-uppercase Số bài pass
+                  th.border-0.bg-light scope="col" 
+                    .py-2.text-uppercase Xóa học sinh
+              tbody
+              - @users.each do |user|
+                tr
+                  th.border-0 scope="row" 
+                    .p-2 
+                      .ml-3.d-inline-block.align-middle
+                        h5.mb-0
+                          a.text-dark.d-inline-block.align-middle href="#" = user.name
+                  td.border-0.align-middle
+                    strong = user.user_exams.includes(:exam).count
+                  td.border-0.align-middle
+                    strong = user.user_exams.includes(:exam).where(is_passed: true).count
+                  td.border-0.align-middle
+                    = link_to admin_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' } do
+                      i.fa.fa-trash-o
+                  td.border-0.align-middle
+                    = link_to t("Chi tiết"), admin_user_path(user.id)
+                    / , class: "str", type: "button", data: {id: "#{exam_cart.exam.id}", time_limit: "#{exam_cart.exam.time_limit}"}                    
+
+

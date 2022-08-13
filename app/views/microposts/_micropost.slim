@@ -1,0 +1,94 @@
+/ | <li id="micropost-
+/ = micropost.id
+/ | "> 
+/ = link_to gravatar_for(micropost.user, size: 50), micropost.user
+/ span.user
+/   = link_to micropost.user.name, micropost.user
+/ span.content
+/   = micropost.content
+/   / = image_tag micropost.picture, width: 400 if micropost.image.attached?
+/ span.timestamp
+/   = "Posted #{time_ago_in_words(micropost.created_at)} ago."
+/   - if current_user?(micropost.user)
+/     / = link_to "Delete", micropost_path , method: :delete, data: { confirm: "You sure?" }
+/ - if logged_in?
+/   h1
+/     | Exam Comments:
+/   br/
+/   - micropost.post_comments.each do |post_comment|
+/     div
+/       span.user
+/         = link_to gravatar_for(post_comment.user, size: 50), post_comment.user
+/         h3 = post_comment.user.name 
+/         |
+/       br/
+/       span.content
+/         = post_comment.content
+/       br/
+/       span.timestamp.text-success
+/         = "Commented #{time_ago_in_words(post_comment.created_at)} ago."
+/         - if current_user == post_comment.user
+/           = link_to "Delete", post_comment , method: :delete, data: {confirm: "You sure?"}
+/   span#form-status
+/     = form_for PostComment.new do |f|
+/       = render 'shared/error_messages', object: f.object
+/       .field
+/         = f.hidden_field :micropost_id, value: micropost.id
+/         = f.hidden_field :user_id, value: current_user.id
+/         = f.text_area :content, placeholder: "Compose new comment...", class: "form-control"
+/       = f.submit "Comment", class: "select"
+
+
+
+.giua4out
+  .giua4
+    .giua4_img
+      div
+        = gravatar_for @user
+      div
+        h2 =@user.name
+        span.time ="#{time_ago_in_words(micropost.created_at)} ago."
+    div
+      span 
+      span 
+  span.conten = micropost.content
+  div
+    img alt="" src="/assets/286401187_4108607816063989_84725963840288798_n.png" /
+  .mcps-end style=("border-top: 1px solid #eee ; padding-top:10px") 
+    .mcps-icon.like
+      img alt="" src="/assets/icon-like.png" style="" /
+      a href="/" 
+        span.icon-span
+    .mcps-icon.like
+      img alt="" src="/assets/icon-comment.png" /
+      a href="/" 
+        span.icon-span 
+    .mcps-icon.extra style=("position:absolute; right:0;") 
+      span 5k Like
+      span 120 Bình luận
+  - if logged_in?
+    br/
+    - micropost.post_comments.each do |post_comment|
+      .content-comment style = ("padding:10px 10px; border-top:1px solid #eee;border-bottom:1px solid #eee")
+        span.user
+          = link_to gravatar_for(post_comment.user, size: 50), post_comment.user
+          h3 = post_comment.user.name 
+          |
+        br/
+        span.content style= "color:#333;"
+          = post_comment.content
+        br/
+        span.timestamp.text-success style="padding-left:59px"
+          = " #{time_ago_in_words(post_comment.created_at)} ago."
+        span style="padding-left:10px"
+          - if current_user == post_comment.user
+            = link_to "Xóa bình luận", post_comment , method: :delete, data: {confirm: "You sure?"}
+    span#form-status
+      = form_for PostComment.new do |f|
+        = render 'shared/error_messages', object: f.object
+        .field
+          = f.hidden_field :micropost_id, value: micropost.id
+          = f.hidden_field :user_id, value: current_user.id
+          = f.text_area :content, placeholder: "Nhập bình luận", class: "form-control"
+          = f.submit "Comment", :type => :image, :src => "/assets/send-message.png", class: "send"
+        
