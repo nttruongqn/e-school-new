@@ -79,7 +79,7 @@
           = post_comment.content
         br/
         span.timestamp.text-success style="padding-left:59px"
-          = " #{time_ago_in_words(post_comment.created_at)} ago."
+          = " #{time_ago_in_words(post_comment.created_at)} trước."
         span style="padding-left:10px"
           - if current_user == post_comment.user
             = link_to "Xóa bình luận", post_comment , method: :delete, data: {confirm: "You sure?"}
